@@ -1,0 +1,16 @@
+body{
+  margin:0;
+  padding:0;
+  background-color:#4ebdc0;
+}
+
+.main{
+  margin: 134px auto;
+  height: 140px;
+  width: 400px;
+}
+
+.pie{
+  float:left;
+  margin-left: 13px;
+}
