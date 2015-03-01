@@ -2,15 +2,37 @@ body{
   margin:0;
   padding:0;
   background-color:#4ebdc0;
+  font-family: 'Helvetica Neue', 'Arial';
 }
 
 .main{
   margin: 134px auto;
-  height: 140px;
+  height: 130px;
   width: 400px;
 }
 
 .pie{
-  float:left;
-  margin-left: 13px;
+  display: inline-block;
+  width: 95px;
+  height: 95px;
+  margin: 0 10px;
+  vertical-align: top;
+  position: relative;
+  padding-top: 22px;
+  text-align: center;
+  color: #E7F7F5;
+
+}
+
+span{
+  display: block;
+  font-size: 2em;
+  font-weight: normal;
+
+}
+
+canvas{
+  position: absolute;
+  left: 0;
+  top: 0;
 }
