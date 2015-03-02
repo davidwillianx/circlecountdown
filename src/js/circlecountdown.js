@@ -1,18 +1,14 @@
-var options = {
-  scaleColor: false,
-  trackColor: 'rgba(255,255,255,0.3)',
-  barColor: '#E7F7F5',
-  lineWidth: 6,
-  lineCap: 'butt',
-  size: 95
-};
+// var options = {
+//   scaleColor: false,
+//   trackColor: 'rgba(255,255,255,0.3)',
+//   barColor: '#E7F7F5',
+//   lineWidth: 6,
+//   lineCap: 'butt',
+//   size: 95
+// };
 
-(function(){
+;(function($){
+  $.fn.circleCountdown = function(options){
 
-  $('.pie').easyPieChart(options);
-
-  // $('.pie').each(function(index,pie){
-  //     chars.push(new EasyPieChart(pie,options));
-  // });
-
-})();
+  }
+})(jQuery);

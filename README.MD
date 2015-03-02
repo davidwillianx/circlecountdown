@@ -1,1 +1,1 @@
-plugin to render a circlecountdown
+plugin to render a circlecountdown using EasyPieChart Plugin
