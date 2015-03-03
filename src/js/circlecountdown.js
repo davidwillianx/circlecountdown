@@ -1,45 +1,52 @@
-// var options = {
-//   scaleColor: false,
-//   trackColor: 'rgba(255,255,255,0.3)',
-//   barColor: '#E7F7F5',
-//   lineWidth: 6,
-//   lineCap: 'butt',
-//   size: 95
-// };
 
 ;(function($){
 
   var defaults = {
-    scaleColor: false,
-    trackColor: 'rgba(255,255,255,0.3}',
-    barColor: '#E7F7F5',
-    lineWidth: 6,
-    lineCap: 'butt',
-    size: 95,
-    time: 20
+      'readOnly': true,
+      'max':60,
+      'min':0,
+      time:60
+  };
+  var timersBase = {
+     second: 1,
+     minute:60,
+     hour:3600,
+     //day:21600
   };
 
-  var drawCountdown =  function(element,options){
+  function DrawCountdown(element,options){
     // Magic it will happend
-    var settings = $.extend({} ,defaults,options);
+    this._settings = $.extend({} ,defaults,options);
+    this._element = element;
+    this.init();
 
   }
 
-  drawCountdown.prototype = {
+  DrawCountdown.prototype = {
+
     init: function(){
-
+        this.draw();
+        this.countdown();
+    },
+    draw: function(){
+      this._element.knob(this._settings);
+      this._element.val(this._settings.time).trigger('change');
+    },
+    countdown: function(){
+        setInterval(this.timeControll,1000);
+    },
+    timeControll: function(){
+        var progressValue = this._element.val();
+        console.log( 'result '+ progressValue);
+        this._element.val(--progressValue).trigger('change');
     }
-
   }
 
   $.fn.circleCountdown = function(options){
 
       var countdown = function(){
-        var element = $(this);
-         drawCountdown(element,options);
-
+         drawCountdown = new DrawCountdown($(this),options);
       };
-
       return this.each(countdown);
   };
 
