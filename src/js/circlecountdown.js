@@ -1,11 +1,15 @@
 
 ;(function($){
-
   var defaults = {
-      'readOnly': true,
-      'max':60,
-      'min':0,
-      time:60
+    value: 0,
+     'readOnly': true,
+      'width': 120,
+      'height': 120,
+      'dynamicDraw': true,
+      'thickness': 0.2,
+      'tickColorizeValues': true,
+      'skin': 'tron',
+      time: 60
   };
   var timersBase = {
      second: 1,
@@ -25,25 +29,40 @@
   DrawCountdown.prototype = {
 
     init: function(){
+        this._element.data('targetValue',new Date().getSeconds());
         this.draw();
         this.countdown();
     },
     draw: function(){
       this._element.knob(this._settings);
-      this._element.val(this._settings.time).trigger('change');
     },
     countdown: function(){
-        setInterval(this.timeControll,1000);
-    },
-    timeControll: function(){
-        var progressValue = this._element.val();
-        console.log( 'result '+ progressValue);
-        this._element.val(--progressValue).trigger('change');
+        $.when(
+            this._element.animate({
+                value: 100
+              },
+              {
+                duration:1000,
+                easing: 'swing',
+                progress: function(){
+                  $(this).val(Math.round(this.value/100*$(this).data('targetValue'))).trigger('change')
+                }
+             }
+          )
+      ).then(function(){
+         interval();
+      });
     }
   }
 
-  $.fn.circleCountdown = function(options){
+  function interval(){
+   var second = new Date().getSeconds();
+       $(this).val(second).trigger('change');
+       setTimeout(this.interval,1000);
+  }
 
+
+  $.fn.circleCountdown = function(options){
       var countdown = function(){
          drawCountdown = new DrawCountdown($(this),options);
       };
